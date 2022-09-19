@@ -41,3 +41,11 @@ exports.getUser = async (username) => {
     return { status: 500, err: err };
   }
 };
+
+exports.checkPassword = async (username, inputPassword) => {
+  const user = await userContext.findOne().byUsername(username);
+
+  if (!user) return false;
+
+  return await user.comparePassword(inputPassword);
+};

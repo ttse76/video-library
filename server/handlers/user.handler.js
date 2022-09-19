@@ -22,3 +22,12 @@ exports.getUser = async (req, res) => {
 
   return res.status(200).send(userInfo.userInfo);
 };
+
+exports.authenticateUser = async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  const isMatch = await userManager.checkPassword(username, password);
+
+  return res.status(200).send({ isMatch });
+};
