@@ -31,9 +31,13 @@ exports.addAdmin = async ({ username, password }) => {
 exports.getUser = async (username) => {
   if (!username) return { err: `username not set` };
 
-  const user = await userContext.findOne().byUsername(username);
+  try {
+    const user = await userContext.findOne().byUsername(username);
 
-  if (!user) return { err: `username ${username} not found` };
-  
-  return user;
+    if (!user) return { status: 404, err: `username ${username} not found` };
+
+    return { status: 200, userInfo: user };
+  } catch(err) {
+    return { status: 500, err: err };
+  }
 };
