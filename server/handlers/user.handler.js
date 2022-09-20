@@ -34,5 +34,5 @@ exports.authenticateUser = async (req, res) => {
     return res.status(200).send({ isMatch, msg: 'Username or password incorrect' });
   }
 
-  return res.status(200).send({ isMatch, apiKey: apiKeyManager.generateKey(username)});
+  return res.status(200).send({ isMatch, username, apiKey: apiKeyManager.generateKey(username)});
 };
