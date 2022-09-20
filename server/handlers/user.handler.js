@@ -1,4 +1,5 @@
 const userManager = require('../src/managers/userManager');
+const apiKeyManager = require('../src/managers/apiKeyManager');
 
 exports.createUser = async (req, res) => {
   const username = req.body.username;
@@ -29,5 +30,9 @@ exports.authenticateUser = async (req, res) => {
 
   const isMatch = await userManager.checkPassword(username, password);
 
-  return res.status(200).send({ isMatch });
+  if (!isMatch) {
+    return res.status(200).send({ isMatch, msg: 'Username or password incorrect' });
+  }
+
+  return res.status(200).send({ isMatch, apiKey: apiKeyManager.generateKey(username)});
 };
