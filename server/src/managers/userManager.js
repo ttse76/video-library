@@ -44,8 +44,10 @@ exports.getUser = async (username) => {
 
 exports.checkPassword = async (username, inputPassword) => {
   const user = await userContext.findOne().byUsername(username);
+  console.log(username);
+  console.log(user)
 
   if (!user) return false;
 
-  return await user.comparePassword(inputPassword);
+  return user.comparePassword(inputPassword);
 };

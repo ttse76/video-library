@@ -42,7 +42,7 @@ export default function Login() {
               <Form.Group controlId="loginPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control 
-                  type="text"
+                  type="password"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password} />
               </Form.Group>
