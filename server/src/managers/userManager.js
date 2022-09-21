@@ -47,5 +47,5 @@ exports.checkPassword = async (username, inputPassword) => {
 
   if (!user) return false;
 
-  return await user.comparePassword(inputPassword);
+  return user.comparePassword(inputPassword);
 };
