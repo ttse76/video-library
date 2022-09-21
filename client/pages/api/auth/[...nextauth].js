@@ -17,7 +17,6 @@ export const authOptions = {
       },
       async authorize(credentials) {
         const res = await authenticate(credentials);
-        console.log(res);
 
         if (!res.isMatch) {
           return null;
