@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { authOptions } from '../api/auth/[...nextauth]';
+import { unstable_getServerSession } from "next-auth/next";
 import { signIn } from 'next-auth/react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -62,4 +64,21 @@ export default function Login() {
       </Row>
     </PageWrapper>
   );
+}
+
+export async function getServerSideProps(ctx) {
+  const session = await unstable_getServerSession(ctx.req, ctx.res, authOptions);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: {}
+  };
 }
