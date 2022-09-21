@@ -17,12 +17,16 @@ export const authOptions = {
       },
       async authorize(credentials) {
         const res = await authenticate(credentials);
+        console.log(res);
 
-        if ((res.status && res.status !== 200) || (res.authenticated)) {
+        if (!res.isMatch) {
           return null;
         }
 
-        return res.user;
+        return {
+          username: res.username,
+          apiKey: res.apiKey
+        };
       }
     })
   ],
